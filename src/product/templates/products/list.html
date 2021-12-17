@@ -55,32 +55,42 @@
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>T-Shirt <br> Created at : 25-Aug-2020</td>
-                    <td>Quality product in low cost</td>
-                    <td>
-                        <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
+                {% for product in product_variant_price %}
+                    <tr>
 
-                            <dt class="col-sm-3 pb-0">
-                                SM/ Red/ V-Nick
-                            </dt>
-                            <dd class="col-sm-9">
-                                <dl class="row mb-0">
-                                    <dt class="col-sm-4 pb-0">Price : 200.0</dt>
-                                    <dd class="col-sm-8 pb-0">InStock : 50.</dd>
-                                </dl>
-                            </dd>
-                        </dl>
-                        <button onclick="$('#variant').toggleClass('h-auto')" class="btn btn-sm btn-link">Show more
-                        </button>
-                    </td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            <a href="" class="btn btn-success">Edit</a>
-                        </div>
-                    </td>
-                </tr>
+                        <td>{{ product.product.id }}</td>
+                        <td>{{ product.product.title }} <br> Created at : {{ product.product.created_at }}</td>
+
+                        <td>{{ product.product.description | truncatechars:60 }}
+{#                        <button onclick="$('#product').toggleClass('h-auto')" class="btn btn-sm btn-link">Show more#}
+{#                            </button></td>#}
+                        <td>
+                            <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
+
+                                <dt class="col-sm-3 pb-0">
+                                    {{ product.productvariant.variant_title }}
+                                </dt>
+
+                                <dd class="col-sm-9">
+{#                                    {% for pvp in product_variant_price %}#}
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-8 pb-0">Price:{{ product.price }}</dt>
+                                        <dd class="col-sm-12 pb-0">InStock : {{ product.stock }}</dd>
+                                    </dl>
+{#                                    {% endfor %}#}
+                                </dd>
+                            </dl>
+                            <button onclick="$('#variant').toggleClass('h-auto')" class="btn btn-sm btn-link">Show more
+                            </button>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="" class="btn btn-success">Edit</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                {% endfor %}
                 </tbody>
 
             </table>
